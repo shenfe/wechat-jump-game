@@ -120,7 +120,7 @@ def run(imgpath, template_index=-1, sx=-1, sy=-1):
         r = region(image, template_index)
         p1 = point1(image, p0)
         if (math.fabs(p1[0] - (r[1] + r[3] / 2)) < 5) \
-                and (math.fabs(p1[1] - (r[2] + r[4])) < 50):
+                and (math.fabs(p1[1] + 10 - (r[2] + r[4])) < 15):
             p1 = (r[1] + r[3] / 2, r[2] + r[4])
         else:
             p1 = (p1[0], p1[1] + 10)
