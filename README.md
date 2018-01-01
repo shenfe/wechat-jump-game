@@ -23,3 +23,9 @@ python src/screenshot.py
 ```commandline
 python src/detect.py
 ```
+
+### 手动模式
+
+```commandline
+python src/hand.py
+```
