@@ -4,3 +4,22 @@
 1. Android手机usb连接电脑并允许usb调试、模拟点击
 1. 执行`python src/main.py`
 
+## 命令
+
+### 运行
+
+```commandline
+python src/main.py
+```
+
+### 截图
+
+```commandline
+python src/screenshot.py
+```
+
+### 检测
+
+```commandline
+python src/detect.py
+```

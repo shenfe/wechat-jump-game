@@ -1,10 +1,13 @@
 import cv2
 import math
-import screenshot
 import os
+import argparse
+import screenshot
+from config import test
 
 
 template_path = 'data/chess.png'
+
 
 
 def point0(large_image):
@@ -65,54 +68,66 @@ def point1(image, p0):
                 return mid, i
 
 
-def region(image):
+def region(image, template_index=-1):
     arr = []
-    for i in range(len(os.listdir('data/template'))):
+    if template_index >= 0:
+        i = template_index
         image1 = cv2.imread(os.path.normpath('data/template/' + str(i) + '.png'), 0)
         result = cv2.matchTemplate(image, image1, cv2.TM_SQDIFF_NORMED)
         result1 = cv2.minMaxLoc(result)
         min_val, max_val, min_loc, max_loc = result1
-        if min_loc[1] < 100:
-            continue
         height, width = image1.shape
         result2 = ((min_val + max_val) / 2, min_loc[0], min_loc[1], width, height, i)
-        # print(i, result2)
-        arr.append(result2)
-    arr.sort(key=lambda x: x[2])
-    # for item in arr:
-    #     print(item)
-    arr1 = arr[1:]
-    j = 0
-    for i in range(len(arr1)):
-        if arr1[i][2] - arr[i][2] > 10:
-            break
-        if (arr1[i][0] < arr[j][0] and arr[j][2] - 5 < arr1[i][2] < arr[j][2] + 5) \
-                or (arr1[i][0] < arr[j][0] + 0.02 and arr1[i][3] > arr[j][3] + 20):
-            j = i + 1
-            continue
-    # print(arr[j][5])
-    return arr[j]
+        if test: print(i, result2)
+        return result2
+    else:
+        for i in range(len(os.listdir('data/template'))):
+            image1 = cv2.imread(os.path.normpath('data/template/' + str(i) + '.png'), 0)
+            result = cv2.matchTemplate(image, image1, cv2.TM_SQDIFF_NORMED)
+            result1 = cv2.minMaxLoc(result)
+            min_val, max_val, min_loc, max_loc = result1
+            if min_loc[1] < 100:
+                continue
+            height, width = image1.shape
+            result2 = ((min_val + max_val) / 2, min_loc[0], min_loc[1], width, height, i)
+            if test: print(i, result2)
+            arr.append(result2)
+        arr.sort(key=lambda x: x[2])
+        if test:
+            for item in arr:
+                print(item)
+        arr1 = arr[1:]
+        j = 0
+        for i in range(len(arr1)):
+            if math.fabs(arr1[i][2] - arr[i][2]) > 10:
+                break
+            if (arr1[i][0] < arr[j][0] and arr[j][2] - 5 < arr1[i][2] < arr[j][2] + 5) \
+                    or (arr1[i][0] < arr[j][0] + 0.02 and arr1[i][3] > arr[j][3] + 20) \
+                    or (math.fabs(arr1[i][2] - arr[j][2]) <= 10 and arr1[i][4] * 2 <= arr[j][4]):
+                j = i + 1
+                continue
+
+        if test: print(arr[j][5])
+        return arr[j]
 
 
-# # Test
-# for i in range(0, 10):
-#     image = cv2.imread(os.path.normpath('data/screenshot/' + str(i) + '.png'), 0)
-#     r = region(image)
-#     cv2.rectangle(image, (r[1], r[2]), (r[1] + r[3], r[2] + r[4]), (0, 0, 255), 2)
-#     cv2.imshow('output', image)
-#     cv2.waitKey(0)
-
-
-def run(imgpath):
+def run(imgpath, template_index=-1, sx=-1, sy=-1):
     image = cv2.imread(imgpath, 0)
     p0 = point0(image)
-    r = region(image)
-    p1 = point1(image, p0)
-    if math.fabs(p1[0] - (r[1] + r[3] / 2)) < 5:
-        p1 = (r[1] + r[3] / 2, r[2] + r[4])
+
+    p1 = (sx, sy)
+    if not (sx > 0 and sy > 0):
+        r = region(image, template_index)
+        p1 = point1(image, p0)
+        if (math.fabs(p1[0] - (r[1] + r[3] / 2)) < 5) \
+                and (math.fabs(p1[1] - (r[2] + r[4])) < 50):
+            p1 = (r[1] + r[3] / 2, r[2] + r[4])
+        else:
+            p1 = (p1[0], p1[1] + 10)
+
     w = p1[0] - p0[2][0]
     h = p0[2][1] - p1[1]
     d = math.sqrt(w * w + h * h)
     re = dict(p0=p0, p1=p1, w=w, h=h, d=d)
-    # print(re)
+    if test: print(re)
     return re
