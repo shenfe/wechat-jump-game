@@ -1,2 +1,2 @@
 def compute(d):
-    return 4.69 * d + 122
+    return 4.645 * d + 122
