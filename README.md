@@ -29,3 +29,14 @@ python src/detect.py
 ```commandline
 python src/hand.py
 ```
+
+## 原理
+
+* Adb连接设备执行命令
+* Opencv图像识别和处理
+* 统计分析得出“距离-时间”线性公式
+* 特殊情况特殊处理
+
+## 建议
+
+自己动手，丰衣足食。无暇回应关于本程序的一切问题。
