@@ -2,3 +2,5 @@
 venv
 data/screenshot*
 data/*.xlsx
+tool
+src/__pycache__
