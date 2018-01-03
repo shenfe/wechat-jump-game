@@ -6,10 +6,16 @@
 
 ## 命令
 
-### 运行（自动模式）
+### 运行自动模式
 
 ```commandline
 python src/main.py
+```
+
+### 运行手动模式
+
+```commandline
+python src/hand.py
 ```
 
 ### 截图预览
@@ -18,17 +24,9 @@ python src/main.py
 python src/preview.py
 ```
 
-### 检测
+### 公式系数
 
-```commandline
-python src/detect.py
-```
-
-### 手动模式
-
-```commandline
-python src/hand.py
-```
+见`src/distance_time.py`。
 
 ## 原理
 
