@@ -82,6 +82,7 @@ def _next_point(d, p):
 
 
 def point2(image, p1):
+    height, width = image.shape
     j, i = p1
     while True:
         if image[i, j - 1] == image[i, j] \
@@ -97,14 +98,19 @@ def point2(image, p1):
     cur_color = image[ii, jj]
     print("find color: ", cur_color)
 
+    out = False
+    
     d = 2  # 0: up, 1: up-left, 2: left, ..., 7: right-up
     last_d = d
     p = (ii, jj)
-    while 2 <= d <= 6:
+    while not out and 2 <= d <= 6:
         if math.fabs(d - last_d) == 4:
             d += 1
             continue
         q = _next_point(d, p)
+        if not (0 < q[0] < height and 0 < q[1] < width):
+            out = True
+            break
         if image[q[0], q[1]] != cur_color:
             d += 1
             continue
@@ -119,11 +125,14 @@ def point2(image, p1):
     d = 6
     last_d = d
     p = (ii, jj)
-    while 2 <= d <= 6:
+    while not out and 2 <= d <= 6:
         if math.fabs(d - last_d) == 4:
             d -= 1
             continue
         q = _next_point(d, p)
+        if not (0 < q[0] < height and 0 < q[1] < width):
+            out = True
+            break
         if image[q[0], q[1]] != cur_color:
             d -= 1
             continue
