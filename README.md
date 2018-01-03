@@ -2,7 +2,8 @@
 
 1. 电脑[安装adb](https://www.xda-developers.com/install-adb-windows-macos-linux/)并加入path
 1. Android手机usb连接电脑并允许usb调试、模拟点击
-1. 执行`python src/main.py`
+1. 执行`pip install -r requirements.txt`安装依赖
+1. 执行`python src/main.py`运行自动模式
 
 ## 命令
 
