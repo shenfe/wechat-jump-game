@@ -6,16 +6,16 @@
 
 ## 命令
 
-### 运行
+### 运行（自动模式）
 
 ```commandline
 python src/main.py
 ```
 
-### 截图
+### 截图预览
 
 ```commandline
-python src/screenshot.py
+python src/preview.py
 ```
 
 ### 检测
