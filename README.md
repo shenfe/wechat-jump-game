@@ -1,8 +1,9 @@
 # 微信小游戏“跳一跳”autoplay程序
 
-<p align="center"><img src="https://raw.githubusercontent.com/shenfe/wechat-jump-game/master/readme_assets/game.png"></p>
-
-<p align="center"><img src="https://raw.githubusercontent.com/shenfe/wechat-jump-game/master/readme_assets/score.jpg"></p>
+<p align="center">
+<img src="https://raw.githubusercontent.com/shenfe/wechat-jump-game/master/readme_assets/game.png">
+<img src="https://raw.githubusercontent.com/shenfe/wechat-jump-game/master/readme_assets/score.jpg">
+</p>
 
 1. 电脑[安装adb](https://www.xda-developers.com/install-adb-windows-macos-linux/)并加入path
 1. Android手机usb连接电脑并允许usb调试、模拟点击
@@ -10,7 +11,7 @@
 1. 在data目录下确保存在screenshot文件夹
 1. 执行`python src/main.py`运行自动模式
 
-*程序适配1280x720屏幕的安卓手机。*
+*程序适配1280x720屏幕的安卓手机，其余分辨率请自行调整代码中相关数值。*
 
 ## 命令
 
