@@ -18,7 +18,7 @@
 ### 运行自动模式
 
 ```commandline
-python src/main.py
+$ python src/main.py
 ```
 
 ### 运行手动模式
@@ -26,13 +26,13 @@ python src/main.py
 将`src/config.py`中`test`设为`True`后，
 
 ```commandline
-python src/hand.py
+$ python src/hand.py
 ```
 
 ### 截图预览
 
 ```commandline
-python src/preview.py
+$ python src/preview.py
 ```
 
 ### 公式系数
